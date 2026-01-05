@@ -13,6 +13,7 @@ wandb = "*"
 einops = "*"
 pybind11 = "*"
 scipy = "*"
+pywavelets = "*"
 
 [dev-packages]
 
