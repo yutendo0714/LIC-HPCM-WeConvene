@@ -106,7 +106,11 @@ def test(args):
         checkpoint = torch.load(ckpt, map_location=device)
         model = net()
         model.eval()
-        model.load_state_dict(checkpoint, strict=True)
+        if isinstance(checkpoint, dict) and "state_dict" in checkpoint:
+            state_dict = checkpoint["state_dict"]
+        else:
+            state_dict = checkpoint
+        model.load_state_dict(state_dict, strict=True)
         model.update(get_scale_table(0.12, 64, args.num))
         model = model.to(device)
 
